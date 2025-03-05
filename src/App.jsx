@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useGeolocation } from "react-use";
+import { AppProvider } from "./contexts/AppContext";
 import axios from "axios";
 import Home from "./pages/Home";
 import City from "./pages/City";
-import Navbar from "./components/Navbar";
 import NavBar from "./components/Navbar";
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
 	const [realTimeData, setRealTimeData] = useState({});
 	const [backgroundURL, setBackgroundURL] = useState("");
 	const [error, setError] = useState("");
-	const [cities, setCities] = useState(["london", "paris"]);
+	// const [cities, setCities] = useState(["london", "paris"]);
 	const [loading, setLoading] = useState(false);
 
 	// API KEYS
@@ -70,21 +70,19 @@ export default function App() {
 
 	return (
 		<>
-			<div >
-				<div>
-					<NavBar cities={cities} />
-					<Routes>
-						<Route
-							path="/"
-							element={<Home />}
-						/>
-						<Route
-							path="/cities/:cityName"
-							element={<City />}
-						/>
-					</Routes>
-				</div>
-			</div>
+			<AppProvider>
+				<NavBar />
+				<Routes>
+					<Route
+						path="/"
+						element={<Home />}
+					/>
+					<Route
+						path="/cities/:cityName"
+						element={<City />}
+					/>
+				</Routes>
+			</AppProvider>
 		</>
 	);
 }
