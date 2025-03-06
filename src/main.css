@@ -1,35 +1,42 @@
 a {
-  font-weight: 500;
+	font-weight: 500;
 	color: #646cff;
 	text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+	color: #535bf2;
 }
 
-*{
-  box-sizing: border-box;
+/* *{
+  box-sizing: border-box;/* Prevents padding from affecting total width} */
+
+html,
+body {
+	height: 100%; /* Ensures the body and HTML take up the full height of the viewport */
+	margin: 0; /* Removes default margin */
 }
 
 body {
-  background-image: url("https://w0.peakpx.com/wallpaper/167/598/HD-wallpaper-blue-flowers-blue-flowers-nature-nice.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
-	margin: 0; /* Ensures no unexpected outer spacing */
-	box-sizing: border-box; /* Prevents padding from affecting total width */
+	background-image: url("https://w0.peakpx.com/wallpaper/167/598/HD-wallpaper-blue-flowers-blue-flowers-nature-nice.jpg");
+	background-repeat: no-repeat;
+	background-size: cover; /* Ensures the background image covers the entire viewport */
+	display: flex;
+}
+
+img.logo {
+	max-width: 100px;
+	max-height: 100px;
+	width: auto; /* Maintains aspect ratio */
+	height: auto;
 }
 
 h1 {
-  font-size: 3.2em;
+	font-size: 3.2em;
 	line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
+	border-radius: 8px;
 	border: 1px solid transparent;
 	padding: 0.6em 1.2em;
 	font-size: 1em;
@@ -40,39 +47,50 @@ button {
 	transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+	border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+	outline: 4px auto -webkit-focus-ring-color;
 }
 
-.left {
-  height: 100%;
-  flex: 0 0 25%; /* Takes up 25% of the screen */
-  background-color: #f0f0f0;
-  flex-direction: column;
+.sidebar {
+	height: 100%;
+	flex: 0 0 25%; /* Takes up 25% of the screen */
+	background-color: #f0f0f0;
+	flex-direction: column;
 }
 
-.center {
-  height: 100%;
-  flex: 1; /* Takes up the remaining space (50% here) */
-  background-color: #e0e0e0;
-  flex-direction: column;
-}
-
-.right {
-  height: 100%;
-  flex: 0 0 25%; /* Takes up 25% of the screen */
-  background-color: #d0d0d0;
-  flex-direction: column;
+.main-content {
+	height: 100%;
+	flex: 1; /* Takes up the remaining space (50% here) */
+	background-color: #e0e0e0;
+	flex-direction: column;
 }
 
 .blurredBackground {
-  padding: 20px;
-  backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
-  background: rgba(255, 255, 255, 0.2); /*→ Gives it a transparent look.*/
-  border-radius: 15px; /*→ Softens the edges.*/
-  border: 1px solid rgba(255, 255, 255, 0.3); /*→ Adds a subtle border.*/
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
+	padding: 20px;
+	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
+	background: rgba(255, 255, 255, 0.2); /*→ Gives it a transparent look.*/
+	border-radius: 15px; /*→ Softens the edges.*/
+	border: 1px solid rgba(255, 255, 255, 0.3); /*→ Adds a subtle border.*/
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
+}
+
+.sidebar {
+	flex: 0 0 25%; /* Takes up 25% of the screen */
+}
+
+.main-content {
+	flex: 1; /* Takes up the remaining space */
+}
+
+.master-container{
+	display: flex
+}
+
+#root {
+	display: flex;
+	flex-direction: row; /* Or row, depending on your layout */
+	height: 100vh; /* Ensures it takes the full height of the viewport */
 }

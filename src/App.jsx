@@ -3,16 +3,15 @@ import { Routes, Route } from "react-router-dom";
 import { useGeolocation } from "react-use";
 import { AppProvider } from "./contexts/AppContext";
 import axios from "axios";
+import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx"
 import Home from "./pages/Home";
 import City from "./pages/City";
-import NavBar from "./components/Navbar";
+import NavBar from "./components/NavBar";
 
 export default function App() {
 	//    STATE VARIABLES
 	const [realTimeData, setRealTimeData] = useState({});
-	const [backgroundURL, setBackgroundURL] = useState("");
 	const [error, setError] = useState("");
-	// const [cities, setCities] = useState(["london", "paris"]);
 	const [loading, setLoading] = useState(false);
 
 	// API KEYS
@@ -31,16 +30,12 @@ export default function App() {
 
 	// -- URLS/ENDPOINTS  --  \\
 	const baseWeatherURL = `http://api.weatherapi.com/v1/`;
+	const currentWeather = `${baseWeatherURL}/current.json?${locationParams.toString()}`;
+
 	const baseUnsplashURL = `https://api.unsplash.com/photos/random?`;
-
-	// Unsplash Information
-	// const randomIndex = Math.floor(Math.random() * colors.length);
-	// const randomColor = colors[randomIndex];
-
 	// const randomPhoto = ``;
 
 	async function fetchWeatherData() {
-		const currentWeather = `${baseWeatherURL}/current.json?${locationParams.toString()}`;
 		try {
 			const response = await axios.get(currentWeather);
 
@@ -58,7 +53,6 @@ export default function App() {
 			setLoading(false);
 		}
 	}
-
 	// useEffect(() => {
 	// 	if (lat && long) {
 	// 		fetchWeatherData();
@@ -67,21 +61,48 @@ export default function App() {
 
 	// For pretty print weather data -->
 	// console.log("realTimeState:", JSON.stringify(realTimeData, null, 2));
+	// console.log("this is location:", location)
 
 	return (
 		<>
 			<AppProvider>
-				<NavBar />
-				<Routes>
-					<Route
-						path="/"
-						element={<Home />}
-					/>
-					<Route
-						path="/cities/:cityName"
-						element={<City />}
-					/>
-				</Routes>
+				<div className="master-container">
+					<div className="sidebar">
+						<img
+							src="/logo.png"
+							alt="Logo"
+							class="logo"
+						/>
+						<img
+							src="/hypelogo.jpg"
+							alt="App Logo"
+							class="logo"
+						/>
+						<NavBar />
+						{/* {location && lat && long &&  }*/}
+						<CurrentLocationTile realTimeData={realTimeData} />
+						{/* SearchBar */}
+						{/* CitiesList(will contain the CityTile(s)) */}
+						<Routes>
+							<Route
+								path="/"
+								element={<Home />}
+							/>
+							<Route
+								path="/cities/:cityName"
+								element={<City />}
+							/>
+						</Routes>
+					</div>
+					<div className="main-content">
+						{/* ForecastCard */}
+						{/* WeatherCard */}
+					</div>
+					<div className="sidebar">
+						{/* randomText topRight lorem ipsum? */}
+						{/* WeatherDetails (contains weatherDetailTile(s)) */}
+					</div>
+				</div>
 			</AppProvider>
 		</>
 	);
@@ -89,8 +110,7 @@ export default function App() {
 
 // Future Enhancements:
 // Loading Indicator: If the API request takes time, you may want to show a loading spinner or message to the user until the data is available.
-// Error Display: Make sure that if there's an error with the weather API or geolocation, the user is informed via the UI (e.g., setError).
-
+// Error Display: Make sure that if there's an error with the weather API or geolocation.
 // Dynamic Cities List: Consider adding functionality that allows users to add cities dynamically via an input field.
 
 // UNSPLASH Supported parameters
