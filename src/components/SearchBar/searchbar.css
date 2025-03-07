@@ -1,0 +1,7 @@
+.search-bar-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+}

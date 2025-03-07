@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "axios": "^1.8.1",
     "country-code-emoji": "^2.3.0",
     "framer-motion": "^12.4.7",

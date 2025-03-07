@@ -1,0 +1,31 @@
+.weathercard-main-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-size: cover;
+	background-position: center;
+	height: 100vh; /* Ensure it takes up the full screen height */
+}
+
+.weathercard-square-container {
+	display: flex;
+	gap: 10px;
+	justify-content: center; /* Centers the squares horizontally */
+	margin-top: 20px;
+}
+
+.weathercard-square {
+	width: 120px;
+	height: 120px; /* Ensure a fixed height */
+	background-color: tomato;
+	color: white;
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 14px;
+}
+

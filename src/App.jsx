@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, data } from "react-router-dom";
 import { useGeolocation } from "react-use";
 import { AppProvider } from "./contexts/AppContext";
 import axios from "axios";
-import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx"
-import Home from "./pages/Home";
-import City from "./pages/City";
+import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx";
+import HomePage from "./pages/HomePage/index.jsx";
+import CityPage from "./pages/CityPage/index.jsx";
 import NavBar from "./components/NavBar";
+import SearchBar from "./components/SearchBar/index.jsx";
+import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
 
 export default function App() {
 	//    STATE VARIABLES
@@ -26,19 +28,21 @@ export default function App() {
 		key: weatherKey,
 		q: `${lat},${long}`,
 		aqi: "yes",
+		alerts: "yes",
+		days: 5,
 	});
-
+	
 	// -- URLS/ENDPOINTS  --  \\
-	const baseWeatherURL = `http://api.weatherapi.com/v1/`;
+	const baseWeatherURL = `http://api.weatherapi.com/v1/forecast`;
 	const currentWeather = `${baseWeatherURL}/current.json?${locationParams.toString()}`;
-
-	const baseUnsplashURL = `https://api.unsplash.com/photos/random?`;
-	// const randomPhoto = ``;
-
+	
+	const randomCityPhoto = `https://api.unsplash.com/photos/random?`;
+	// const photoByWeather = `https://api.unsplash.com//photos/random?`
+	
 	async function fetchWeatherData() {
 		try {
 			const response = await axios.get(currentWeather);
-
+			
 			if (response.data) {
 				setRealTimeData(response.data);
 			} else {
@@ -53,11 +57,17 @@ export default function App() {
 			setLoading(false);
 		}
 	}
-	// useEffect(() => {
-	// 	if (lat && long) {
-	// 		fetchWeatherData();
-	// 	}
-	// }, [lat, long]);
+	
+	useEffect(() => {
+			if (lat && long) {
+					fetchWeatherData();
+				}
+			}, [lat, long]);
+
+			// const photoParams = new URLSearchParams({
+			// 	query: {realTimeData.current.condition.text},
+			// 	client_id: `${splashKey}`,
+			// })
 
 	// For pretty print weather data -->
 	// console.log("realTimeState:", JSON.stringify(realTimeData, null, 2));
@@ -73,30 +83,30 @@ export default function App() {
 							alt="Logo"
 							class="logo"
 						/>
-						<img
-							src="/hypelogo.jpg"
-							alt="App Logo"
-							class="logo"
-						/>
-						<NavBar />
 						{/* {location && lat && long &&  }*/}
 						<CurrentLocationTile realTimeData={realTimeData} />
-						{/* SearchBar */}
-						{/* CitiesList(will contain the CityTile(s)) */}
+						<SearchBar />
+						<NavBar
+							realTimeData={realTimeData}
+							splashKey={unsplashKey}
+						/>
 						<Routes>
 							<Route
 								path="/"
-								element={<Home />}
+								element={<HomePage />}
 							/>
 							<Route
 								path="/cities/:cityName"
-								element={<City />}
+								element={<CityPage />}
 							/>
 						</Routes>
 					</div>
 					<div className="main-content">
-						{/* ForecastCard */}
-						{/* WeatherCard */}
+						{/* <ForecastCard splashKey={unsplashKey} /> */}
+						<WeatherCard
+							realTimeData={realTimeData}
+							splashKey={unsplashKey}
+						/>
 					</div>
 					<div className="sidebar">
 						{/* randomText topRight lorem ipsum? */}
