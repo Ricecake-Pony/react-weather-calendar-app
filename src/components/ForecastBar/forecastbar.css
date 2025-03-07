@@ -1,0 +1,8 @@
+.forecast-master-container{
+    display: flex;
+
+}
+
+.forecast-bar{
+flex-direction: row;
+}

@@ -1,14 +1,9 @@
 import React from "react";
 
 export default function ForecastCard(props) {
-	const { splashKey, currentWeatherData, testData } = props;
+	const { testData } = props;
 
-
-    // console.log(currentWeatherData)
-
-	return (
-	<>
-		{/* {testData} */}
-	</>
-	);
+	return <div className="forecastcard-container">
+            Woww
+    </div>;
 }

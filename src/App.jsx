@@ -6,7 +6,7 @@ import axios from "axios";
 import HomePage from "./pages/HomePage/index.jsx";
 import CityPage from "./pages/CityPage/index.jsx";
 import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx";
-import ForecastCard from "./components/ForecastCard/index.jsx";
+import ForecastBar from "./components/ForecastBar/index.jsx"
 import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar/index.jsx";
 import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
@@ -34,10 +34,10 @@ export default function App() {
 		days: 5,
 	});
 
-	// -- URLS/ENDPOINTS  --  \\
-	const baseWeatherURL = `http://api.weatherapi.com/v1/`;
-	const currentWeather = `${baseWeatherURL}/forecast.json?${locationParams.toString()}`;
-	
+	// -- UrlS/ENDPOINTS  --  \\
+	const baseWeatherUrl = `http://api.weatherapi.com/v1/`;
+	const currentWeather = `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`;
+
 	useEffect(() => {
 	async function fetchWeatherData() {
 		try {
@@ -65,13 +65,12 @@ export default function App() {
 
 	// For pretty print weather data -->
 	// console.log("realTimeState:", JSON.stringify(currentWeatherData, null, 2));
-	console.log("try this again,", currentWeather)
 
 	return (
 		<>
 			<AppProvider>
 				<div className="master-container">
-					<div className="sidebar">
+					<div className="sidebar blurredBackground">
 						<img
 							src="/logo.png"
 							alt="Logo"
@@ -100,19 +99,21 @@ export default function App() {
 							/>
 						</Routes>
 					</div>
-					<div className="main-content">
-						<ForecastCard
+					<div className="main-content blurredBackground">
+						<ForecastBar
 							testData={testData}
 							splashKey={unsplashKey}
 							currentWeatherData={currentWeatherData}
 						/>
-						{Object.keys(currentWeatherData).length > 0 && <WeatherCard
-							testData={testData}
-							currentWeatherData={currentWeatherData}
-							splashKey={unsplashKey}
-						/>}
+						{Object.keys(currentWeatherData).length > 0 && (
+							<WeatherCard
+								testData={testData}
+								currentWeatherData={currentWeatherData}
+								splashKey={unsplashKey}
+							/>
+						)}
 					</div>
-					<div className="sidebar">
+					<div className="sidebar blurredBackground">
 						{/* randomText topRight lorem ipsum? */}
 						{/* WeatherDetails (contains weatherDetailTile(s)) */}
 					</div>
