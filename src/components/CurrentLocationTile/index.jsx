@@ -2,13 +2,13 @@ import React from "react";
 import { countryCodeEmoji } from "country-code-emoji";
 import countries from "i18n-iso-countries";
 import en from "i18n-iso-countries/langs/en.json";
-import './currentlocationtile.css'; 
+import "./currentlocationtile.css";
 countries.registerLocale(en);
 
 export default function CurrentLocationTile(props) {
-	const { realTimeData } = props;
+	const { currentWeatherData } = props;
 
-	const data = {
+	const testData = {
 		realTimeState: {
 			location: {
 				name: "Longmont",
@@ -67,19 +67,22 @@ export default function CurrentLocationTile(props) {
 			},
 		},
 	};
-	const countryName = data.realTimeState.location.country.toString();
+	const countryName = testData.realTimeState.location.country.toString();
 	const countryCode = countries.getAlpha2Code(countryName, "en");
 	const countryCodeFlag = countryCodeEmoji(countryCode);
 	return (
 		<>
-        <div className="current-location-tile-container">
-			<div className="flag">{countryCodeFlag}</div>
-            <div className="current-location-tile-info">
-                <span>Current Location</span>
-                <br/>
-                <span>{data.realTimeState.location.country} - {data.realTimeState.location.name}</span>
-            </div>
-        </div>
+			<div className="current-location-tile-container">
+				<div className="flag">{countryCodeFlag}</div>
+				<div className="current-location-tile-info">
+					<span>Current Location</span>
+					<br />
+					<span>
+						{testData.realTimeState.location.country} -{" "}
+						{testData.realTimeState.location.name}
+					</span>
+				</div>
+			</div>
 		</>
 	);
 }

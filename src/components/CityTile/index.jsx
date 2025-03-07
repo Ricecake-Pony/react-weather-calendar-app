@@ -7,9 +7,9 @@ countries.registerLocale(en);
 import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
 
 export default function CityTile(props) {
-	const { realTimeData } = props;
+	const { currentWeatherData } = props;
 
-	const data = {
+	const testData = {
 		realTimeState: {
 			location: {
 				name: "Longmont",
@@ -68,7 +68,7 @@ export default function CityTile(props) {
 			},
 		},
 	};
-	const countryName = data.realTimeState.location.country.toString();
+	const countryName = testData.realTimeState.location.country.toString();
 	const countryCode = countries.getAlpha2Code(countryName, "en");
 	const countryCodeFlag = countryCodeEmoji(countryCode);
 
@@ -77,9 +77,9 @@ export default function CityTile(props) {
 			<div className="city-tile-container">
 				<div className="flag">{countryCodeFlag}</div>
 				<span>
-					{countryCode} {data.realTimeState.location.name}
+					{countryCode} {testData.realTimeState.location.name}
 				</span>
-				<span>{data.realTimeState.current.temp_f}</span> <ArrowLongRightIcon />
+				<span>{testData.realTimeState.current.temp_f}</span> <ArrowLongRightIcon />
 			</div>
 		</>
 	);

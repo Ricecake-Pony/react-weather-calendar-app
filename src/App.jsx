@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, data } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useGeolocation } from "react-use";
 import { AppProvider } from "./contexts/AppContext";
 import axios from "axios";
-import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx";
 import HomePage from "./pages/HomePage/index.jsx";
 import CityPage from "./pages/CityPage/index.jsx";
+import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx";
+import ForecastCard from "./components/ForecastCard/index.jsx";
 import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar/index.jsx";
 import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
+import testData from "./testData.json";
 
 export default function App() {
 	//    STATE VARIABLES
-	const [realTimeData, setRealTimeData] = useState({});
+	const [currentWeatherData, setCurrentWeatherData] = useState({});
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
 
@@ -31,20 +33,18 @@ export default function App() {
 		alerts: "yes",
 		days: 5,
 	});
-	
+
 	// -- URLS/ENDPOINTS  --  \\
-	const baseWeatherURL = `http://api.weatherapi.com/v1/forecast`;
-	const currentWeather = `${baseWeatherURL}/current.json?${locationParams.toString()}`;
+	const baseWeatherURL = `http://api.weatherapi.com/v1/`;
+	const currentWeather = `${baseWeatherURL}/forecast.json?${locationParams.toString()}`;
 	
-	const randomCityPhoto = `https://api.unsplash.com/photos/random?`;
-	// const photoByWeather = `https://api.unsplash.com//photos/random?`
-	
+	useEffect(() => {
 	async function fetchWeatherData() {
 		try {
 			const response = await axios.get(currentWeather);
-			
+
 			if (response.data) {
-				setRealTimeData(response.data);
+				setCurrentWeatherData(response.data);
 			} else {
 				setError("No data received from the weather service");
 			}
@@ -57,21 +57,15 @@ export default function App() {
 			setLoading(false);
 		}
 	}
-	
-	useEffect(() => {
-			if (lat && long) {
-					fetchWeatherData();
-				}
-			}, [lat, long]);
 
-			// const photoParams = new URLSearchParams({
-			// 	query: {realTimeData.current.condition.text},
-			// 	client_id: `${splashKey}`,
-			// })
+	if (lat && long) {
+			fetchWeatherData();
+		}
+	}, [lat, long]);
 
 	// For pretty print weather data -->
-	// console.log("realTimeState:", JSON.stringify(realTimeData, null, 2));
-	// console.log("this is location:", location)
+	// console.log("realTimeState:", JSON.stringify(currentWeatherData, null, 2));
+	console.log("try this again,", currentWeather)
 
 	return (
 		<>
@@ -84,10 +78,15 @@ export default function App() {
 							class="logo"
 						/>
 						{/* {location && lat && long &&  }*/}
-						<CurrentLocationTile realTimeData={realTimeData} />
-						<SearchBar />
+						<CurrentLocationTile currentWeatherData={currentWeatherData} />
+						<SearchBar
+							testData={testData}
+							currentWeatherData={currentWeatherData}
+							splashKey={unsplashKey}
+						/>
 						<NavBar
-							realTimeData={realTimeData}
+							testData={testData}
+							currentWeatherData={currentWeatherData}
 							splashKey={unsplashKey}
 						/>
 						<Routes>
@@ -102,11 +101,16 @@ export default function App() {
 						</Routes>
 					</div>
 					<div className="main-content">
-						{/* <ForecastCard splashKey={unsplashKey} /> */}
-						<WeatherCard
-							realTimeData={realTimeData}
+						<ForecastCard
+							testData={testData}
 							splashKey={unsplashKey}
+							currentWeatherData={currentWeatherData}
 						/>
+						{Object.keys(currentWeatherData).length > 0 && <WeatherCard
+							testData={testData}
+							currentWeatherData={currentWeatherData}
+							splashKey={unsplashKey}
+						/>}
 					</div>
 					<div className="sidebar">
 						{/* randomText topRight lorem ipsum? */}
