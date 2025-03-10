@@ -54,18 +54,14 @@ export default function WeatherCard(props) {
 							"Accept-Version": "v1",
 						},
 					});
-					console.log("backgroundPhoto response:",response)
 					if (response.data) {
 						const regionalPhotos = response.data.results;
-						console.log("regionalPhotos", regionalPhotos);
-
 						const randomUrl = regionalPhotos[randomNum]?.urls?.regular;
-						console.log("randomURL:", randomUrl);
 
-						if (randomUrl) setBackgroundUrl(randomUrl);
+						if (randomUrl) {setBackgroundUrl(randomUrl);
 						document.body.style.backgroundImage = `url(${randomUrl})`;
 						document.body.style.backgroundSize = "cover";
-						document.body.style.backgroundPosition = "center";
+						document.body.style.backgroundPosition = "center";}
 					}
 				} catch (error) {
 					console.error("Error fetching image: ", error);
@@ -87,9 +83,9 @@ export default function WeatherCard(props) {
 				className="weathercard-main-container"
 				style={{
 					backgroundImage: `url(${weatherUrl})`,
-					// backgroundImage: `url("https://images.unsplash.com/photo-1445297983845-454043d4eef4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTY1MzR8MHwxfHNlYXJjaHwyfHxwYXJ0bHklMjBjbG91ZHl8ZW58MHx8fHwxNzQxMzE4MzM1fDA&ixlib=rb-4.0.3&q=80&w=1080")`,
 					backgroundSize: "cover",
 					backgroundPosition: "center",
+					
 				}}
 			>
 				<div>

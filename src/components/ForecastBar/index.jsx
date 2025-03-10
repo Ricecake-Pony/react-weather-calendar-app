@@ -7,13 +7,14 @@ export default function ForecastBar(props) {
 
 	// FOR THE CAROUSEL using react slick: if (testData.forecast.forecastday.length >= 5){}
 
+	console.log(forecastDays)
 	return (
 	<div className="forecast-master-container">
 			<div>
 				{testData.location.name}, {testData.location.region}
 			</div>
 			<ul className="forecast-bar">
-				{/* {forecastDays.map( (day) => <li> <ForecastCard testData={forecastDays}/> </li>)} */}
+				{forecastDays.map( (day) => <li> <ForecastCard testData={forecastDays}/> </li>)}
 			</ul>
 	</div>
 	);

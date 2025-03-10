@@ -6,21 +6,19 @@ a {
 a:hover {
 	color: #535bf2;
 }
-
-/* *{
-  box-sizing: border-box;/* Prevents padding from affecting total width} */
-
+	
 html,
 body {
-	height: 100%; /* Ensures the body and HTML take up the full height of the viewport */
+	box-sizing: border-box;
+	height: 100vh; /* Ensures the body and HTML take up the full height of the viewport */
 	margin: 0; /* Removes default margin */
+	overflow-x: hidden;
 }
 
 body {
 	background-image: url("https://w0.peakpx.com/wallpaper/167/598/HD-wallpaper-blue-flowers-blue-flowers-nature-nice.jpg");
 	background-repeat: no-repeat;
 	background-size: cover; /* Ensures the background image covers the entire viewport */
-	/* display: flex; */
 }
 
 img.logo {
@@ -44,7 +42,6 @@ h1 {
 }
 
 .main-content {
-	margin: 0, .5rem;
 	height: 100%;
 	flex: 1; /* Takes up the remaining space (50% here) */
 	background-color: #e0e0e0;
@@ -52,6 +49,8 @@ h1 {
 }
 
 .blurredBackground {
+	margin: 0 20px;
+	margin-top: 15px;
 	padding: 20px;
 	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
 	background: rgba(255, 255, 255, 0.2); /*→ Gives it a transparent look.*/
@@ -67,6 +66,5 @@ h1 {
 
 
 #root {
-	display: flex;
-	/* flex-direction: row; Or row, depending on your layout */
+	display: block;
 }
