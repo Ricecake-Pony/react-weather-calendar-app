@@ -1,8 +1,18 @@
-.forecast-master-container{
-    display: flex;
+.forecast-master-container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.forecast-bar {
+    padding:0;
+	display: flex;
+    gap: 10px;
 
 }
 
-.forecast-bar{
-flex-direction: row;
+.center{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

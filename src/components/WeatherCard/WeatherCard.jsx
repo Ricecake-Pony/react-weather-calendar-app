@@ -58,10 +58,12 @@ export default function WeatherCard(props) {
 						const regionalPhotos = response.data.results;
 						const randomUrl = regionalPhotos[randomNum]?.urls?.regular;
 
-						if (randomUrl) {setBackgroundUrl(randomUrl);
-						document.body.style.backgroundImage = `url(${randomUrl})`;
-						document.body.style.backgroundSize = "cover";
-						document.body.style.backgroundPosition = "center";}
+						if (randomUrl) {
+							setBackgroundUrl(randomUrl);
+							document.body.style.backgroundImage = `url(${randomUrl})`;
+							document.body.style.backgroundSize = "cover";
+							document.body.style.backgroundPosition = "center";
+						}
 					}
 				} catch (error) {
 					console.error("Error fetching image: ", error);
@@ -78,35 +80,33 @@ export default function WeatherCard(props) {
 
 	return (
 		<>
-			<h5>Weather for {testData.location.country}</h5>
 			<div
 				className="weathercard-main-container"
 				style={{
 					backgroundImage: `url(${weatherUrl})`,
 					backgroundSize: "cover",
 					backgroundPosition: "center",
-					
 				}}
 			>
-				<div>
-					<div>
+				<div className="weathercard-details">
+					<div className="text-overlay">
 						<img src={`https:${testData.current.condition.icon}`} />
+						<br />
 						<span>{testData.current.condition.text} </span>
+						<div>{testData.current.temp_f}°F</div>
+						<div>{testData.location.name}</div>
 					</div>
-					<div>{testData.current.temp_f}°F</div>
-					<div>{testData.location.name}</div>
 				</div>
-
-				<div className="weathercard-square-container ">
-					<div className="weathercard-square">
-						Feels like:
-						{testData.current.feelslike_f}
-					</div>
-					<div className="weathercard-square">Max Temp:</div>
-					<div className="weathercard-square">Min Temp:</div>
-					<div className="weathercard-square">
-						Cloud Coverage: {testData.current.cloud}
-					</div>
+			</div>
+			<div className="weathercard-square-container ">
+				<div className="weathercard-square">
+					Feels like:
+					{testData.current.feelslike_f}
+				</div>
+				<div className="weathercard-square">Max Temp:</div>
+				<div className="weathercard-square">Min Temp:</div>
+				<div className="weathercard-square">
+					Cloud Coverage: {testData.current.cloud}
 				</div>
 			</div>
 		</>

@@ -1,0 +1,9 @@
+.forecastcard-container{
+    width: 120px ;
+    height: 250px;;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+}

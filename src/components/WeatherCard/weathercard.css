@@ -1,17 +1,32 @@
 .weathercard-main-container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	flex-direction: column;
-	background-size: cover;
-	background-position: center;
-	height: 100vh; /* Ensure it takes up the full screen height */
+	height: auto;
+	border-radius: 15px;
+}
+
+.text-overlay {
+	background: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+	padding: 1rem;
+	border-radius: 8px;
+	color: white;
+}  
+
+.text-overlay h1,
+.text-overlay p {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+.weathercard-details{
+
+
 }
 
 .weathercard-square-container {
 	display: flex;
 	gap: 10px;
-	justify-content: center; /* Centers the squares horizontally */
+	justify-content: center;
 	margin-top: 20px;
 }
 
