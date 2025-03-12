@@ -10,6 +10,7 @@ import ForecastBar from "./components/ForecastBar/index.jsx"
 import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar/index.jsx";
 import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
+import WeatherTiles from "./components/WeatherTiles/WeatherTiles.jsx";
 import testData from "./testData.json";
 
 export default function App() {
@@ -74,7 +75,7 @@ export default function App() {
 						<img
 							src="/logo.png"
 							alt="Logo"
-							class="logo"
+							className="logo"
 						/>
 						{/* {location && lat && long &&  }*/}
 						<CurrentLocationTile currentWeatherData={currentWeatherData} />
@@ -115,7 +116,7 @@ export default function App() {
 					</div>
 					<div className="sidebar blurredBackground">
 						{/* randomText topRight lorem ipsum? */}
-						{/* WeatherDetails (contains weatherDetailTile(s)) */}
+						<WeatherTiles testData={testData}/>
 					</div>
 				</div>
 			</AppProvider>

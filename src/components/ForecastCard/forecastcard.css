@@ -1,9 +1,20 @@
-.forecastcard-container{
-    width: 120px ;
-    height: 250px;;
+.forecastcard-container {
+    width: 140px;             /* Slightly wider for more room */
+    height: 280px;            /* Increased height for a balanced look */
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
+    justify-content: space-between; /* Evenly space the content */
     align-items: center;
-    border: 1px solid red;
-}
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.2);  /* Translucent white */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+    backdrop-filter: blur(8px);  /* Glassmorphism blur effect */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .forecastcard-container:hover {
+	transform: translateY(-4px); /* Lift on hover */
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+	}

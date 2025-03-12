@@ -16,19 +16,19 @@ body {
 	box-sizing: border-box;
 	height: 100vh; /* Ensures the body and HTML take up the full height of the viewport */
 	margin: 0; /* Removes default margin */
-	overflow-x: hidden;
+	color: white;
 }
 
 body {
 	background-image: url("https://w0.peakpx.com/wallpaper/167/598/HD-wallpaper-blue-flowers-blue-flowers-nature-nice.jpg");
 	background-repeat: no-repeat;
-	background-size: cover; /* Ensures the background image covers the entire viewport */
+	background-size: cover; 
 }
 
 img.logo {
 	max-width: 100px;
 	max-height: 100px;
-	width: auto; /* Maintains aspect ratio */
+	width: auto;
 	height: auto;
 }
 
@@ -47,7 +47,7 @@ h1 {
 
 .main-content {
 	height: 100%;
-	flex: 1; /* Takes up the remaining space (50% here) */
+	flex: 0 0 50%; /* Takes up the remaining space (50% here) */
 	background-color: #e0e0e0;
 	flex-direction: column;
 }
@@ -57,17 +57,17 @@ h1 {
 	margin-top: 15px;
 	padding: 20px;
 	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
-	background: rgba(255, 255, 255, 0.2); /*→ Gives it a transparent look.*/
-	border-radius: 15px; /*→ Softens the edges.*/
-	border: 1px solid rgba(255, 255, 255, 0.3); /*→ Adds a subtle border.*/
+	border-radius: 15px;
+	border: 1px solid rgba(255, 255, 255, 0.3); 
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
+	background: rgba(0, 0, 0, 0.2);
 }
 
-.master-container{
-	display: flex
+.master-container {
+	display: flex;
+	flex-direction: row;
+	height: 100vh;
 }
-
-
 
 #root {
 	display: block;

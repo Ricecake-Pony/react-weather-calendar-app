@@ -8,7 +8,7 @@ export default function ForecastBar(props) {
 	const [forecastDays, setForecastDays] = useState(
 		testData.forecast.forecastday
 	);
-
+		// console.log(testData)
 	// FOR THE CAROUSEL using react slick: if (testData.forecast.forecastday.length >= 5){}
 	return (
 		<>

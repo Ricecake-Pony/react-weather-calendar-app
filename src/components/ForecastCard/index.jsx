@@ -10,9 +10,9 @@ export default function ForecastCard(props) {
 			{new Date(dayData.date).toLocaleDateString("en-US", {
 				weekday: "long",
 			})}
-			<br />
+			<br/>
 			<img src={`https:${dayData.day.condition.icon}`} />
-			<br />
+			<br/>
 			<span>{dayData.day.condition.text}</span>
 			<br />
 			{dayData.day.maxtemp_f}°F / {dayData.day.mintemp_f}°F

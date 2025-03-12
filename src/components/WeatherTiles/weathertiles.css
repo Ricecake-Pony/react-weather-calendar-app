@@ -1,31 +1,9 @@
-.weathercard-main-container {
-	display: flex;
-	flex-direction: column;
-	height: auto;
-	border-radius: 15px;
+.weather-tiles-container{
+  display: flex;
+  flex-direction: column;
 }
 
-.text-overlay {
-	background: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
-	padding: 1rem;
-	border-radius: 8px;
-	color: white;
-}  
-
-.text-overlay h1,
-.text-overlay p {
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-
-.weathercard-square-container {
-	display: flex;
-	gap: 10px;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-.weathercard-square {
+.weather-tile {
 	width: 120px;
 	height: 120px;
 	display: flex;
@@ -44,9 +22,7 @@
 	text-align: center;
 	}
 
-	.weathercard-square:hover {
+	.weather-tile:hover {
 	transform: translateY(-4px); /* Lift on hover */
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow */
 	}
-
-
