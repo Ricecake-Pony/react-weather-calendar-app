@@ -100,13 +100,16 @@ export default function WeatherCard(props) {
 			</div>
 			<div className="weathercard-square-container ">
 				<div className="weathercard-square">
-					Feels like:
-					{testData.current.feelslike_f}
+					Feels like {testData.current.feelslike_f}°F
 				</div>
-				<div className="weathercard-square">Max Temp:</div>
-				<div className="weathercard-square">Min Temp:</div>
 				<div className="weathercard-square">
-					Cloud Coverage: {testData.current.cloud}
+					Wind Chill of {testData.current.windchill_f}°F
+				</div>
+				<div className="weathercard-square">
+					Humidity: {testData.current.humidity}%
+				</div>
+				<div className="weathercard-square">
+					Chance of rain is {testData.forecast.forecastday[0].day.daily_chance_of_rain}%
 				</div>
 			</div>
 		</>

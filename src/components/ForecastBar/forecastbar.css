@@ -1,18 +1,20 @@
-.forecast-master-container {
-	display: flex;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
-.forecast-bar {
-    padding:0;
-	display: flex;
-    gap: 10px;
-
-}
-
-.center{
+.forecast-header{
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	margin-bottom: 12px;
+}
+
+.forecast-master-container {
+	width: 100%;
+	max-width: 1200px; /* Adjust based on how wide you want the entire slider */
+	margin: 0 auto;
+}
+
+.slick-slide {
+	display: flex;
+	justify-content: center;
+	opacity: 1; /* Reduces opacity for non-centered slides */
+	transition: opacity 0.3s ease-in-out; /* Smooth transition for opacity */
+	background: rgba(0, 0, 0, 0.1); /* Black with 50% opacity */
+	color: white;
 }

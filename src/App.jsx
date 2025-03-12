@@ -32,7 +32,7 @@ export default function App() {
 		q: `${lat},${long}`,
 		aqi: "yes",
 		alerts: "yes",
-		days: 5,
+		days: 10,
 	});
 
 	// -- UrlS/ENDPOINTS  --  \\

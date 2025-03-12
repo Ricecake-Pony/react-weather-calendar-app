@@ -4,19 +4,21 @@ import "./weathertiles.css"
 export default function WeatherTiles(props) {
 	const {testData} = props
 	console.log(testData)
+
+
 	return (
 		<div className="weather-tiles-container">
 			<div className="weather-tile">
-					Cloud coverage: {testData.current.cloud} %
+					Cloud coverage: {testData.current.cloud}%
 			</div>
 			<div className="weather-tile">
-					Heat Index: {testData.current.heatindex_f} %
+					Heat Index: {testData.current.heatindex_f}°F
 			</div>
 			<div className="weather-tile">
-					Humidity: {testData.current.humidity} %
+					Max Temp: {testData.forecast.forecastday[0].day.maxtemp_f}°F
 			</div>
 			<div className="weather-tile">
-					Wind Chill: {testData.current.windchill_f} %
+					Min Temp: {testData.forecast.forecastday[0].day.mintemp_f}°F
 			</div>
 		</div>
 	);
