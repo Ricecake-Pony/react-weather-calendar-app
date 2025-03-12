@@ -1,23 +1,35 @@
+/* Main Container */
 .weathercard-main-container {
 	display: flex;
 	flex-direction: column;
 	height: auto;
 	margin-top: 32px;
 	border-radius: 15px;
+	background: #000; /* Black or near-black background */
+	border: 2px solid rgba(255, 215, 0, 0.15); /* Soft gold border */
+	box-shadow: 0 4px 8px rgba(255, 215, 0, 0.1); /* Gold-tinted shadow */
 }
 
+/* Text Overlay */
 .text-overlay {
 	padding: 1rem;
 	border-radius: 8px;
-	background: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
-}  
+	background: rgba(0, 0, 0, 0.3);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
+	color: #fff; /* Ensure text is readable on dark background */
+}
 
 .text-overlay h1,
 .text-overlay p {
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	/* Optionally, give headers a gold tint:
+	    color: #FFD700;
+	    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.4);
+	*/
 }
 
-
+/* Squares Container */
 .weathercard-square-container {
 	display: flex;
 	gap: 10px;
@@ -25,6 +37,7 @@
 	margin-top: 20px;
 }
 
+/* Individual Squares */
 .weathercard-square {
 	width: 120px;
 	height: 120px;
@@ -32,21 +45,23 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: rgba(0, 0, 0, 0.25); /* Translucent glass effect */
-	border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
-	backdrop-filter: blur(8px); /* Glassmorphism blur */
-	border-radius: 12px; /* Slightly larger radius for a softer look */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle elevation */
-	color: #fff; /* White text for contrast */
+
+	/* Match the forecastcard-container's style: */
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 2px solid rgba(255, 215, 0, 0.5); /* Same gold border */
+	box-shadow: 0 4px 8px rgba(255, 215, 0, 0.1); /* Same gold box-shadow */
+	backdrop-filter: blur(8px);
+	border-radius: 12px;
+
+	color: #ffffff;
 	font-size: 14px;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 	padding: 10px;
 	text-align: center;
-	}
+}
 
-	.weathercard-square:hover {
-	transform: translateY(-4px); /* Lift on hover */
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Deeper shadow */
-	}
-
-
+/* Hover Effect */
+.weathercard-square:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3); /* More intense gold glow */
+}

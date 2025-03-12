@@ -42,7 +42,6 @@ h1 {
 	flex: 1; /* Allow it to grow but take less space */
 	min-width: 200px; 
 	max-width: 300px; 
-	background-color: #f0f0f0;
 	flex-direction: column;
 }
 
@@ -58,9 +57,9 @@ h1 {
 	padding: 20px;
 	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
 	border-radius: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.3); 
+	border: 1px solid #ffffff; 
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
-	background: rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.5);
 }
 
 .master-container {

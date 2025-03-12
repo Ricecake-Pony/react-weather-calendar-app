@@ -1,12 +1,12 @@
 .forecastcard-container {
 	color: #ffffff;
-	background-color: rgba(0, 0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.5); /* Glassmorphism effect */
 	position: relative; /* Needed for absolute positioning of the flag */
-	width: 100%;
-	max-width: 400px;
+	max-width: 500px;
 	min-width: 300px;
 	padding: 16px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	border: 2px solid rgba(255, 215, 0, 0.5); /* Soft gold border */
+	box-shadow: 0 4px 8px rgba(255, 215, 0, 0.1);
 	backdrop-filter: blur(8px);
 	border-radius: 12px;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -14,7 +14,7 @@
 
 .forecastcard-container.today {
 	position: relative;
-	transform: scale(1.08); /* Slightly larger */
+	transform: scale(1.08); /* Slightly larger for emphasis */
 }
 
 .forecastcard-container.today::after {
@@ -25,8 +25,8 @@
 	transform: translate(-50%, -50%);
 	font-size: 50px;
 	font-weight: bold;
-	color: rgba(0, 255, 255, 0.3);
-	text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.8);
+	color: rgba(255, 215, 0, 0.5); /* Gold tint */
+	text-shadow: 0px 0px 20px rgba(255, 215, 0, 0.8); /* Regal gold glow */
 	animation: flicker 2s infinite alternate ease-in-out;
 }
 

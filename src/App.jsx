@@ -18,6 +18,7 @@ export default function App() {
 	const [currentWeatherData, setCurrentWeatherData] = useState({});
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [fetchUrl, setFetchUrl] = useState("")
 
 	// API KEYS
 	const weatherKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -35,15 +36,17 @@ export default function App() {
 		days: 10,
 	});
 
-	// -- UrlS/ENDPOINTS  --  \\
+	console.log(lat, long)
+	// -- Urls/ENDPOINTS  --  \\
 	const baseWeatherUrl = `http://api.weatherapi.com/v1/`;
-	const currentWeather = `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`;
-
-	useEffect(() => {
-	async function fetchWeatherData() {
+	
+	async function fetchWeatherData(cityUrl) {
+		if (cityUrl.length > 0){
+			setFetchUrl(cityUrl)
+			return;
+		}
 		try {
-			const response = await axios.get(currentWeather);
-
+			const response = await axios.get(fetchUrl);
 			if (response.data) {
 				setCurrentWeatherData(response.data);
 			} else {
@@ -58,14 +61,16 @@ export default function App() {
 			setLoading(false);
 		}
 	}
-
-	if (lat && long) {
-			fetchWeatherData();
+	
+	useEffect(() => {
+		if (lat && long) {
+			setFetchUrl( `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`);
+			fetchWeatherData(fetchUrl);
 		}
 	}, [lat, long]);
 
 	// For pretty print weather data -->
-	// console.log("realTimeState:", JSON.stringify(currentWeatherData, null, 2));
+	// console.log("currentWeatherData:", JSON.stringify(currentWeatherData, null, 2));
 
 	return (
 		<>
@@ -77,12 +82,13 @@ export default function App() {
 							alt="Logo"
 							className="logo"
 						/>
-						{/* {location && lat && long &&  }*/}
+						{location && lat && long &&  
 						<CurrentLocationTile currentWeatherData={currentWeatherData} />
+						}
 						<SearchBar
 							testData={testData}
-							currentWeatherData={currentWeatherData}
-							splashKey={unsplashKey}
+							fetchWeatherData={fetchWeatherData}
+							weatherKey={weatherKey}
 						/>
 						<NavBar
 							testData={testData}
@@ -128,12 +134,3 @@ export default function App() {
 // Loading Indicator: If the API request takes time, you may want to show a loading spinner or message to the user until the data is available.
 // Error Display: Make sure that if there's an error with the weather API or geolocation.
 // Dynamic Cities List: Consider adding functionality that allows users to add cities dynamically via an input field.
-
-// UNSPLASH Supported parameters
-// We officially support the parameters:
-// w, h: for adjusting the width and height of a photo
-// crop: for applying cropping to the photo
-// fm: for converting image format
-// auto=format: for automatically choosing the optimal image format depending on user browser
-// q: for changing the compression quality when using lossy file formats
-// fit: for changing the fit of the image within the specified dimensions

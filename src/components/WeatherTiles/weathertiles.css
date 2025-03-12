@@ -12,12 +12,11 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: rgba(0, 0, 0, 0.5); /* Translucent glass effect */
-	border: 1px solid rgba(255, 255, 255, 0.3); /* Soft border */
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid #ffffff; 
 	backdrop-filter: blur(8px); /* Glassmorphism blur */
 	border-radius: 12px; /* Slightly larger radius for a softer look */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle elevation */
-	color: #fff; /* White text for contrast */
 	font-size: 14px;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 	padding: 10px;
