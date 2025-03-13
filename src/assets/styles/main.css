@@ -15,7 +15,7 @@ html,
 body {
 	box-sizing: border-box;
 	height: 100vh; /* Ensures the body and HTML take up the full height of the viewport */
-	margin: 0; 
+	margin: 0;
 	color: white;
 	overflow-x: hidden;
 }
@@ -23,7 +23,7 @@ body {
 body {
 	background-image: url("https://w0.peakpx.com/wallpaper/167/598/HD-wallpaper-blue-flowers-blue-flowers-nature-nice.jpg");
 	background-repeat: no-repeat;
-	background-size: cover; 
+	background-size: cover;
 }
 
 img.logo {
@@ -40,8 +40,8 @@ h1 {
 
 .sidebar {
 	flex: 1; /* Allow it to grow but take less space */
-	min-width: 200px; 
-	max-width: 300px; 
+	min-width: 200px;
+	max-width: 300px;
 	flex-direction: column;
 }
 
@@ -57,7 +57,7 @@ h1 {
 	padding: 20px;
 	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
 	border-radius: 16px;
-	border: 1px solid #ffffff; 
+	border: 1px solid #ffffff;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
 	background: rgba(0, 0, 0, 0.5);
 }
@@ -66,6 +66,32 @@ h1 {
 	display: flex;
 	flex-direction: row;
 	height: 100vh;
+}
+
+.error-message {
+	position: relative;
+	padding: 10px 15px;
+	background: rgba(255, 0, 0, 0.2); /* Subtle red tint */
+	color: rgba(255, 50, 50, 0.9); /* Bright error red */
+	border: 1px solid rgba(255, 50, 50, 0.6); /* Soft red border */
+	border-radius: 10px;
+	text-align: center;
+	font-weight: bold;
+	box-shadow: 0 0 15px rgba(255, 0, 0, 0.4); /* Red glow */
+	backdrop-filter: blur(10px); /* Glass effect */
+	animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Optional: Add a flicker effect similar to your "TODAY" flag */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 #root {

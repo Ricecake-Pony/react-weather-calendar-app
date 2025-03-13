@@ -15,14 +15,13 @@ export default function ForecastCard(props) {
 		today.getMonth() === forecastDate.getMonth() &&
 		today.getDate() === forecastDate.getDate();
 
-	console.log("isToday:", isToday);
-
 	return (
 		<div
 			className={
 				isToday ? "forecastcard-container today" : "forecastcard-container"
 			}
 		>
+			<br/>
 			{new Date(dayData.date).toLocaleDateString("en-US", {
 				weekday: "long",
 			})}

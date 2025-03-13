@@ -7,7 +7,7 @@ export default function WeatherCard(props) {
 	const [backgroundUrl, setBackgroundUrl] = useState(
 		"https://images.unsplash.com/photo-1445297983845-454043d4eef4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTY1MzR8MHwxfHNlYXJjaHwyfHxwYXJ0bHklMjBjbG91ZHl8ZW58MHx8fHwxNzQxMzE4MzM1fDA&ixlib=rb-4.0.3&q=80&w=1080"
 	);
-	const { splashKey, currentWeatherData, testData } = props;
+	const { splashKey, currentWeatherData } = props;
 
 	useEffect(() => {
 		const randomNum = Math.floor(Math.random() * 10) + 1;
@@ -90,26 +90,27 @@ export default function WeatherCard(props) {
 			>
 				<div className="weathercard-details">
 					<div className="text-overlay">
-						<img src={`https:${testData.current.condition.icon}`} />
+						<img src={`https:${currentWeatherData.current.condition.icon}`} />
 						<br />
-						<span>{testData.current.condition.text} </span>
-						<div>{testData.current.temp_f}°F</div>
-						<div>{testData.location.name}</div>
+						<span>{currentWeatherData.current.condition.text} </span>
+						<div>{currentWeatherData.current.temp_f}°F</div>
+						<div>{currentWeatherData.location.name}</div>
 					</div>
 				</div>
 			</div>
 			<div className="weathercard-square-container ">
 				<div className="weathercard-square">
-					Feels like {testData.current.feelslike_f}°F
+					Feels like {currentWeatherData.current.feelslike_f}°F
 				</div>
 				<div className="weathercard-square">
-					Wind Chill of {testData.current.windchill_f}°F
+					Wind Chill of {currentWeatherData.current.windchill_f}°F
 				</div>
 				<div className="weathercard-square">
-					Humidity: {testData.current.humidity}%
+					Humidity: {currentWeatherData.current.humidity}%
 				</div>
 				<div className="weathercard-square">
-					Chance of rain is {testData.forecast.forecastday[0].day.daily_chance_of_rain}%
+					Chance of rain is{" "}
+					{currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%
 				</div>
 			</div>
 		</>

@@ -3,14 +3,12 @@ import ForecastCard from "../ForecastCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import "./forecastbar.css";
-import { to } from "react-spring";
 
 export default function ForecastBar(props) {
-	const { splashKey, currentWeatherData, testData } = props;
+	const { splashKey, currentWeatherData  } = props;
 	const [forecastDays, setForecastDays] = useState(
-		testData.forecast.forecastday
+		currentWeatherData.forecast.forecastday
 	);
 
 	const settings = {
@@ -36,13 +34,11 @@ export default function ForecastBar(props) {
 		],
 	};
 
-	
-
 	return (
 		<>
 			<span className="forecast-header">
-				{forecastDays.length}-Day Forecast for {testData.location.name},
-				{testData.location.region}
+				{forecastDays.length}-Day Forecast for{" "}
+				{currentWeatherData.location.name},{currentWeatherData.location.region}
 			</span>
 			<div className="forecast-master-container">
 				<Slider {...settings}>

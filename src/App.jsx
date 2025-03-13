@@ -6,19 +6,17 @@ import axios from "axios";
 import HomePage from "./pages/HomePage/index.jsx";
 import CityPage from "./pages/CityPage/index.jsx";
 import CurrentLocationTile from "./components/CurrentLocationTile/index.jsx";
-import ForecastBar from "./components/ForecastBar/index.jsx"
+import ForecastBar from "./components/ForecastBar/index.jsx";
 import NavBar from "./components/NavBar";
 import SearchBar from "./components/SearchBar/index.jsx";
 import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
 import WeatherTiles from "./components/WeatherTiles/WeatherTiles.jsx";
-import testData from "./testData.json";
 
 export default function App() {
 	//    STATE VARIABLES
 	const [currentWeatherData, setCurrentWeatherData] = useState({});
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [fetchUrl, setFetchUrl] = useState("")
 
 	// API KEYS
 	const weatherKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -36,17 +34,14 @@ export default function App() {
 		days: 10,
 	});
 
-	console.log(lat, long)
-	// -- Urls/ENDPOINTS  --  \\
 	const baseWeatherUrl = `http://api.weatherapi.com/v1/`;
-	
-	async function fetchWeatherData(cityUrl) {
-		if (cityUrl.length > 0){
-			setFetchUrl(cityUrl)
-			return;
-		}
+
+	async function fetchWeatherData(url) {
+		if (url.length > 0) {;
+		} 
+
 		try {
-			const response = await axios.get(fetchUrl);
+			const response = await axios.get(url);
 			if (response.data) {
 				setCurrentWeatherData(response.data);
 			} else {
@@ -61,71 +56,70 @@ export default function App() {
 			setLoading(false);
 		}
 	}
-	
+
 	useEffect(() => {
 		if (lat && long) {
-			setFetchUrl( `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`);
-			fetchWeatherData(fetchUrl);
+			const url = `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`;;
+			fetchWeatherData(url);
+			console.log("currentWeatherData:", currentWeatherData);
 		}
 	}, [lat, long]);
 
-	// For pretty print weather data -->
-	// console.log("currentWeatherData:", JSON.stringify(currentWeatherData, null, 2));
+	console.log("currentWeatherData:", currentWeatherData);
+	console.log(lat, long);
 
 	return (
 		<>
-			<AppProvider>
-				<div className="master-container">
-					<div className="sidebar blurredBackground">
-						<img
-							src="/logo.png"
-							alt="Logo"
-							className="logo"
-						/>
-						{location && lat && long &&  
-						<CurrentLocationTile currentWeatherData={currentWeatherData} />
-						}
-						<SearchBar
-							testData={testData}
-							fetchWeatherData={fetchWeatherData}
-							weatherKey={weatherKey}
-						/>
-						<NavBar
-							testData={testData}
+			{Object.keys(currentWeatherData).length > 0 && (
+				<AppProvider>
+					<div className="master-container">
+						<div className="sidebar blurredBackground">
+							<img
+								src="/logo.png"
+								alt="Logo"
+								className="logo"
+							/>
+							{lat && long && (
+								<CurrentLocationTile currentWeatherData={currentWeatherData} />
+							)}
+							<SearchBar
+								currentWeatherData={currentWeatherData}
+								fetchWeatherData={fetchWeatherData}
+								weatherKey={weatherKey}
+							/>
+							<NavBar
 							currentWeatherData={currentWeatherData}
 							splashKey={unsplashKey}
-						/>
-						<Routes>
-							<Route
-								path="/"
-								element={<HomePage />}
 							/>
-							<Route
-								path="/cities/:cityName"
-								element={<CityPage />}
-							/>
-						</Routes>
-					</div>
-					<div className="main-content blurredBackground">
-						<ForecastBar
-							testData={testData}
-							splashKey={unsplashKey}
+							<Routes>
+								<Route
+									path="/"
+									element={<HomePage />}
+								/>
+								<Route
+									path="/cities/:cityName"
+									element={<CityPage />}
+								/>
+							</Routes>
+						</div>
+						<div className="main-content blurredBackground">
+							<ForecastBar
 							currentWeatherData={currentWeatherData}
-						/>
-						{Object.keys(currentWeatherData).length > 0 && (
+							splashKey={unsplashKey}
+							/>
+
 							<WeatherCard
-								testData={testData}
 								currentWeatherData={currentWeatherData}
 								splashKey={unsplashKey}
 							/>
-						)}
+						</div>
+						<div className="sidebar blurredBackground">
+							{/* randomText topRight lorem ipsum? */}
+							<WeatherTiles currentWeatherData={currentWeatherData} />
+						</div>
 					</div>
-					<div className="sidebar blurredBackground">
-						{/* randomText topRight lorem ipsum? */}
-						<WeatherTiles testData={testData}/>
-					</div>
-				</div>
-			</AppProvider>
+				</AppProvider>
+			)}
 		</>
 	);
 }
