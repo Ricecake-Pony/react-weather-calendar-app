@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 import CityTile from "../../components/CityTile/index";
+import FavCitiesList from "../FavCitiesList";
 
 export default function NavBar(props) {
 	const { currentWeatherData } = props;
-	const { cities, user } = useContext(AppContext);
+	const { cities } = useContext(AppContext);
 
 	return (
 		<>
@@ -21,6 +22,7 @@ export default function NavBar(props) {
 						</li>
 					))}
 				</ul>
+				<FavCitiesList currentWeatherData = { currentWeatherData } />
 			</nav>
 		</>
 	);

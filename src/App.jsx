@@ -65,9 +65,6 @@ export default function App() {
 		}
 	}, [lat, long]);
 
-	console.log("currentWeatherData:", currentWeatherData);
-	console.log(lat, long);
-
 	return (
 		<>
 			{Object.keys(currentWeatherData).length > 0 && (

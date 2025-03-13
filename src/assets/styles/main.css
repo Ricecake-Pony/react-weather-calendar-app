@@ -55,11 +55,23 @@ h1 {
 .blurredBackground {
 	margin: 16px 20px;
 	padding: 20px;
-	backdrop-filter: blur(10px); /*→ Creates the frosted glass effect. */
+	backdrop-filter: blur(
+		15px
+	); /*→ Stronger blur for a deeper frosted glass effect. */
 	border-radius: 16px;
-	border: 1px solid #ffffff;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Creates a lifted effect.*/
-	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.2); /*→ Subtle border for more realism. */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1); /*→ Deeper shadows for a more lifted effect. */
+	background: rgba(
+		0,
+		0,
+		0,
+		0.3
+	); /*→ Slightly lighter background to allow more depth behind. */
+	background: linear-gradient(
+		135deg,
+		rgba(255, 255, 255, 0.1),
+		rgba(0, 0, 0, 0.6)
+	); /*→ Adds gradient for depth and light reflections. */
 }
 
 .master-container {

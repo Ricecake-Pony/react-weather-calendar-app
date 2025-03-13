@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
-import AppContext from "./contexts/AppContext";
+import AppContext from "../../contexts/AppContext";
 import "./searchbar.css";
 
 export default function SearchBar({ fetchWeatherData, weatherKey }) {
 	const [userInput, setUserInput] = useState("");
 	const [errorMsg, setErrorMsg] = useState("");
-	const { cities, setCities } = useContext(AppContext);
+	const { cities, setCities, user, setUser } = useContext(AppContext);
 
 	const userQuery = userInput.trim().toLowerCase();
 	const cityParams = new URLSearchParams({
@@ -23,7 +23,7 @@ export default function SearchBar({ fetchWeatherData, weatherKey }) {
 		if (!cities.includes(userQuery)) {
 			setCities([...cities, userQuery]);
 			setUserInput("");
-			setErrorMsg(""); // clear any previous error
+			setErrorMsg(""); 
 			fetchWeatherData(cityUrl);
 		} else {
 			console.error("City already added:", userQuery);

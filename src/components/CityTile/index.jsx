@@ -8,10 +8,7 @@ import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
 
 export default function CityTile({ currentWeatherData }) {
 
-	console.log("testing:", currentWeatherData)
-
-	const countryName =
-		currentWeatherData.location.country.toString();
+	const countryName = currentWeatherData.location.country.toString();
 	const countryCode = countries.getAlpha2Code(countryName, "en");
 	const countryCodeFlag = countryCodeEmoji(countryCode);
 
