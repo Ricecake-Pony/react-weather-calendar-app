@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./weathercard.css"; // Relative path to the file
 
-export default function WeatherCard(props) {
+export default function WeatherCard({displayedWeatherData, splashKey}) {
+
 	const [weatherUrl, setWeatherUrl] = useState("");
 	const [backgroundUrl, setBackgroundUrl] = useState(
 		"https://images.unsplash.com/photo-1445297983845-454043d4eef4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MTY1MzR8MHwxfHNlYXJjaHwyfHxwYXJ0bHklMjBjbG91ZHl8ZW58MHx8fHwxNzQxMzE4MzM1fDA&ixlib=rb-4.0.3&q=80&w=1080"
 	);
-	const { splashKey, currentWeatherData } = props;
+	const { current, location, forecast } = displayedWeatherData;
 
 	useEffect(() => {
 		const randomNum = Math.floor(Math.random() * 10) + 1;
+		
 
-		if (currentWeatherData?.current?.condition?.text) {
+		if (current?.condition?.text) {
 			async function fetchWeatherImage() {
 				const photoParams = new URLSearchParams({
-					query: `${currentWeatherData.current.condition.text}`,
+					query: `${current.condition.text}`,
 					client_id: `${splashKey}`,
 				});
 
@@ -27,7 +29,7 @@ export default function WeatherCard(props) {
 							"Accept-Version": "v1",
 						},
 					});
-					// console.log("WeatherPhotoresponse:", response);
+					
 					if (response.data) {
 						const weatherData = response;
 						const weatherPhotos = response.data.results;
@@ -42,7 +44,7 @@ export default function WeatherCard(props) {
 
 			async function fetchBackgroundImage() {
 				const photoParams = new URLSearchParams({
-					query: `${currentWeatherData.current.condition.text} ${currentWeatherData.location.region}`,
+					query: `${current.condition.text} ${location.region}`,
 					client_id: `${splashKey}`,
 				});
 
@@ -72,7 +74,7 @@ export default function WeatherCard(props) {
 			fetchBackgroundImage();
 			fetchWeatherImage();
 		}
-	}, [currentWeatherData]);
+	}, [displayedWeatherData]);
 
 	if (backgroundUrl.length > 0) {
 		document.body.style.backgroundImage = `url(${backgroundUrl})`;
@@ -90,27 +92,27 @@ export default function WeatherCard(props) {
 			>
 				<div className="weathercard-details">
 					<div className="text-overlay">
-						<img src={`https:${currentWeatherData.current.condition.icon}`} />
+						<img src={`https:${current.condition.icon}`} />
 						<br />
-						<span>{currentWeatherData.current.condition.text} </span>
-						<div>{currentWeatherData.current.temp_f}°F</div>
-						<div>{currentWeatherData.location.name}</div>
+						<span>{current.condition.text} </span>
+						<div>{current.temp_f}°F</div>
+						<div>{location.name}</div>
 					</div>
 				</div>
 			</div>
 			<div className="weathercard-square-container ">
 				<div className="weathercard-square">
-					Feels like {currentWeatherData.current.feelslike_f}°F
+					Feels like {current.feelslike_f}°F
 				</div>
 				<div className="weathercard-square">
-					Wind Chill of {currentWeatherData.current.windchill_f}°F
+					Wind Chill of {current.windchill_f}°F
 				</div>
 				<div className="weathercard-square">
-					Humidity: {currentWeatherData.current.humidity}%
+					Humidity: {current.humidity}%
 				</div>
 				<div className="weathercard-square">
 					Chance of rain is{" "}
-					{currentWeatherData.forecast.forecastday[0].day.daily_chance_of_rain}%
+					{forecast.forecastday[0].day.daily_chance_of_rain}%
 				</div>
 			</div>
 		</>

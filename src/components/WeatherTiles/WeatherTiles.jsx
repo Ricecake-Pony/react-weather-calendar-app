@@ -1,22 +1,22 @@
 import React from "react";
 import "./weathertiles.css";
 
-export default function WeatherTiles(props) {
-	const { currentWeatherData } = props;
+export default function WeatherTiles({displayedWeatherData}) {
+	const { current, forecast } = displayedWeatherData;
 
 	return (
 		<div className="weather-tiles-container">
 			<div className="weather-tile">
-				Cloud coverage: {currentWeatherData.current.cloud}%
+				Cloud coverage: {current.cloud}%
 			</div>
 			<div className="weather-tile">
-				Heat Index: {currentWeatherData.current.heatindex_f}°F
+				Heat Index: {current.heatindex_f}°F
 			</div>
 			<div className="weather-tile">
-				Max Temp: {currentWeatherData.forecast.forecastday[0].day.maxtemp_f}°F
+				Max Temp: {forecast.forecastday[0].day.maxtemp_f}°F
 			</div>
 			<div className="weather-tile">
-				Min Temp: {currentWeatherData.forecast.forecastday[0].day.mintemp_f}°F
+				Min Temp: {forecast.forecastday[0].day.mintemp_f}°F
 			</div>
 		</div>
 	);

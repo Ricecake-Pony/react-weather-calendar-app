@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useGeolocation } from "react-use";
 import { AppProvider } from "./contexts/AppContext";
@@ -13,10 +13,12 @@ import WeatherCard from "./components/WeatherCard/WeatherCard.jsx";
 import WeatherTiles from "./components/WeatherTiles/WeatherTiles.jsx";
 
 export default function App() {
-	//    STATE VARIABLES
-	const [currentWeatherData, setCurrentWeatherData] = useState({});
+	// STATE VARIABLES
+	const [geoWeatherData, setGeoWeatherData] = useState({});
+	const [cityWeatherData, setCityWeatherData] = useState({});
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
+
 
 	// API KEYS
 	const weatherKey = import.meta.env.VITE_WEATHER_API_KEY;
@@ -26,28 +28,49 @@ export default function App() {
 	const location = useGeolocation();
 	const lat = location.latitude;
 	const long = location.longitude;
-	const locationParams = new URLSearchParams({
-		key: weatherKey,
-		q: `${lat},${long}`,
-		aqi: "yes",
-		alerts: "yes",
-		days: 10,
-	});
+	const baseWeatherUrl = `http://api.weatherapi.com/v1`;
 
-	const baseWeatherUrl = `http://api.weatherapi.com/v1/`;
-
-	async function fetchWeatherData(url) {
-		if (url.length > 0) {;
-		} 
-
+	async function fetchGeoWeatherData(url) {
 		try {
 			const response = await axios.get(url);
 			if (response.data) {
-				setCurrentWeatherData(response.data);
+				setGeoWeatherData(response.data);
+				return response.data
 			} else {
 				setError("No data received from the weather service");
 			}
-			return;
+		} catch (err) {
+			const errorMessage = err.response ? err.response.data : err.message;
+			const errorStatus = err.response ? err.response.status : err.code;
+			setError(`${errorMessage} Code: ${errorStatus}`);
+		} finally {
+			setLoading(false);
+		}
+	}
+	useEffect(() => {
+		if (lat && long) {
+			const locationParams = new URLSearchParams({
+				key: weatherKey,
+				q: `${lat},${long}`,
+				aqi: "yes",
+				alerts: "yes",
+				days: 10,
+			});
+			const url = `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`;
+			fetchGeoWeatherData(url);
+		}
+	}, [lat, long]);
+
+	async function fetchCityWeatherData(url) {
+		console.log("Fetching weather data from:", url);
+		try {
+			const response = await axios.get(url);
+			if (response.data) {
+				setCityWeatherData(response.data);
+				return response.data
+			} else {
+				setError("No data received from the weather service");
+			}
 		} catch (err) {
 			const errorMessage = err.response ? err.response.data : err.message;
 			const errorStatus = err.response ? err.response.status : err.code;
@@ -57,17 +80,15 @@ export default function App() {
 		}
 	}
 
-	useEffect(() => {
-		if (lat && long) {
-			const url = `${baseWeatherUrl}/forecast.json?${locationParams.toString()}`;;
-			fetchWeatherData(url);
-			console.log("currentWeatherData:", currentWeatherData);
-		}
-	}, [lat, long]);
+
+
+	// a work around to use .length on an object
+	const displayedWeatherData =
+		Object.keys(cityWeatherData).length > 0 ? cityWeatherData : geoWeatherData;
 
 	return (
 		<>
-			{Object.keys(currentWeatherData).length > 0 && (
+			{Object.keys(displayedWeatherData).length > 0 && (
 				<AppProvider>
 					<div className="master-container">
 						<div className="sidebar blurredBackground">
@@ -77,42 +98,33 @@ export default function App() {
 								className="logo"
 							/>
 							{lat && long && (
-								<CurrentLocationTile currentWeatherData={currentWeatherData} />
+								<CurrentLocationTile geoWeatherData={geoWeatherData} />
 							)}
 							<SearchBar
-								currentWeatherData={currentWeatherData}
-								fetchWeatherData={fetchWeatherData}
+								fetchCityWeatherData={fetchCityWeatherData}
 								weatherKey={weatherKey}
 							/>
-							<NavBar
-							currentWeatherData={currentWeatherData}
-							splashKey={unsplashKey}
-							/>
+							<NavBar displayedWeatherData={displayedWeatherData} />
 							<Routes>
 								<Route
 									path="/"
-									element={<HomePage />}
+									element={<HomePage fetchGeoWeatherData={fetchGeoWeatherData} />}
 								/>
 								<Route
 									path="/cities/:cityName"
-									element={<CityPage />}
+									element={<CityPage weatherKey={weatherKey}  fetchCityWeatherData={fetchCityWeatherData}/>}
 								/>
 							</Routes>
 						</div>
 						<div className="main-content blurredBackground">
-							<ForecastBar
-							currentWeatherData={currentWeatherData}
-							splashKey={unsplashKey}
-							/>
-
+							<ForecastBar displayWeatherData={displayedWeatherData} />
 							<WeatherCard
-								currentWeatherData={currentWeatherData}
+								displayedWeatherData={displayedWeatherData}
 								splashKey={unsplashKey}
 							/>
 						</div>
 						<div className="sidebar blurredBackground">
-							{/* randomText topRight lorem ipsum? */}
-							<WeatherTiles currentWeatherData={currentWeatherData} />
+							<WeatherTiles displayedWeatherData={displayedWeatherData} />
 						</div>
 					</div>
 				</AppProvider>
@@ -120,8 +132,3 @@ export default function App() {
 		</>
 	);
 }
-
-// Future Enhancements:
-// Loading Indicator: If the API request takes time, you may want to show a loading spinner or message to the user until the data is available.
-// Error Display: Make sure that if there's an error with the weather API or geolocation.
-// Dynamic Cities List: Consider adding functionality that allows users to add cities dynamically via an input field.

@@ -5,10 +5,9 @@ import en from "i18n-iso-countries/langs/en.json";
 import "./currentlocationtile.css";
 countries.registerLocale(en);
 
-export default function CurrentLocationTile({ currentWeatherData }) {
-
-	const countryName =
-		currentWeatherData.location.country.toString();
+export default function CurrentLocationTile({ geoWeatherData }) {
+	const { location, current } = geoWeatherData;
+	const countryName = location.country.toString();
 	const countryCode = countries.getAlpha2Code(countryName, "en");
 	const countryCodeFlag = countryCodeEmoji(countryCode);
 	return (
@@ -19,8 +18,7 @@ export default function CurrentLocationTile({ currentWeatherData }) {
 					<span>Current Location</span>
 					<br />
 					<span>
-						{currentWeatherData.location.country} -{" "}
-						{currentWeatherData.location.name}
+						{location.country} - {location.name}
 					</span>
 				</div>
 			</div>

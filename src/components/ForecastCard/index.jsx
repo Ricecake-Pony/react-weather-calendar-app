@@ -1,15 +1,11 @@
 import React from "react";
 import "./forecastcard.css";
 
-export default function ForecastCard(props) {
-	const { dayData } = props;
-
-	// console.log("dayData:", dayData)
+export default function ForecastCard(dayData) {
+	const { date, day } = dayData;
 
 	const today = new Date();
 	const forecastDate = new Date(dayData.date);
-	// console.log("forecast Date:", forecastDate, "today's date:", today);
-
 	const isToday =
 		today.getFullYear() === forecastDate.getFullYear() &&
 		today.getMonth() === forecastDate.getMonth() &&
@@ -22,18 +18,18 @@ export default function ForecastCard(props) {
 			}
 		>
 			<br/>
-			{new Date(dayData.date).toLocaleDateString("en-US", {
+			{new Date(date).toLocaleDateString("en-US", {
 				weekday: "long",
 			})}
 			<br />
-			{new Date(dayData.date).toLocaleDateString("en-US")}
+			{new Date(date).toLocaleDateString("en-US")}
 			<br />
-			<img src={`https:${dayData.day.condition.icon}`} />
+			<img src={`https:${day.condition.icon}`} />
 			<br />
-			<span>{dayData.day.condition.text}</span>
+			<span>{day.condition.text}</span>
 			<br />
 			<br />
-			{dayData.day.maxtemp_f}°F / {dayData.day.mintemp_f}°F
+			{day.maxtemp_f}°F / {day.mintemp_f}°F
 		</div>
 	);
 }

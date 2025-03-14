@@ -6,22 +6,23 @@ import "./citytile.css";
 countries.registerLocale(en);
 import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
 
-export default function CityTile({ currentWeatherData }) {
+export default function CityTile({ displayedWeatherData = {} }) {
+	if (!displayedWeatherData.location || !displayedWeatherData.current) {
+		return null; // Or return a loading spinner/message
+	}
+		const {location, current} = displayedWeatherData
 
-	const countryName = currentWeatherData.location.country.toString();
+	const countryName = location.country.toString();
 	const countryCode = countries.getAlpha2Code(countryName, "en");
 	const countryCodeFlag = countryCodeEmoji(countryCode);
 
 	return (
-		<>
-			<div className="city-tile-container">
-				<div className="flag">{countryCodeFlag}</div>
-				<span>
-					{countryCode} {currentWeatherData.location.name}
-				</span>
-				<span>{currentWeatherData.current.temp_f}</span>{" "}
-				<ArrowLongRightIcon />
-			</div>
-		</>
+		<div className="city-tile-container">
+			<div className="flag">{countryCodeFlag}</div>
+			<span>
+				{countryCode} {location.name}
+			</span>
+			<span>{current.temp_f}</span> <ArrowLongRightIcon />
+		</div>
 	);
 }

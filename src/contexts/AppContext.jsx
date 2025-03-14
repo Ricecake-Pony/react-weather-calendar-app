@@ -12,15 +12,15 @@ export function AppProvider({ children }) {
 	});
     
 	useEffect(() => {
-        const signIn = prompt("Please enter your name:");
-		if (signIn.length > 0) {
-            setUser((prevUser) => ({
-                ...prevUser,
-				username: signIn,
-			}));
+		const signIn = prompt("Please enter your name:");
+		if (signIn) {
+		setUser((prevUser) => ({
+			...prevUser,
+			username: signIn,
+		}));
 		}
 		alert(`Hello, ${user.username}!`);
-	}, []);
+	}, []);  
     
         useEffect(() => {
             localStorage.setItem("user", JSON.stringify(user));

@@ -15,7 +15,6 @@
 	padding: 1rem;
 	border-radius: 8px;
 	background: rgba(0, 0, 0, 0.3);
-	backdrop-filter: blur(8px);
 	border: 1px solid rgba(255, 215, 0, 0.3); /* Gold border */
 	color: #fff; /* Ensure text is readable on dark background */
 }
@@ -24,8 +23,8 @@
 .text-overlay p {
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 	/* Optionally, give headers a gold tint:
-	    color: #FFD700;
-	    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.4);
+    color: #FFD700;
+	text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.4);
 	*/
 }
 

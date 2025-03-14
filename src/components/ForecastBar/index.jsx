@@ -5,18 +5,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./forecastbar.css";
 
-export default function ForecastBar(props) {
-	const { splashKey, currentWeatherData  } = props;
-	const [forecastDays, setForecastDays] = useState(
-		currentWeatherData.forecast.forecastday
-	);
+export default function ForecastBar(displayedWeatherData = {}) {
+	if (!displayedWeatherData.location || !displayedWeatherData.forecast) {
+		return null; // Or return a loading spinner/message
+	}
+
+	const { location, forecast } = displayedWeatherData;
+
+	const [forecastDays, setForecastDays] = useState(forecast.forecastday);
 
 	const settings = {
 		dots: true,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 3,
-		slidesToScroll: 1,
+		slidesToShow: 5,
+		slidesToScroll: 2,
 		variableWidth: false,
 		responsive: [
 			{
@@ -37,8 +40,7 @@ export default function ForecastBar(props) {
 	return (
 		<>
 			<span className="forecast-header">
-				{forecastDays.length}-Day Forecast for{" "}
-				{currentWeatherData.location.name},{currentWeatherData.location.region}
+				{forecastDays.length}-Day Forecast for {location.name},{location.region}
 			</span>
 			<div className="forecast-master-container">
 				<Slider {...settings}>
